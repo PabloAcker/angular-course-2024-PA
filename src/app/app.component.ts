@@ -23,4 +23,13 @@ export class AppComponent {
   private substract(num1: number, num2: number): number{
     return num1 - num2
   }
+
+  public getArray(): void {
+    const person: number[] = [1, 2, 3, 4, 5];
+    const peerPersons = person.filter(p => p % 2 === 0);
+    for (let i = 0; i < peerPersons.length; i++) {
+      console.log('person = ', peerPersons[i]);
+    }
+  }
+  
 }
