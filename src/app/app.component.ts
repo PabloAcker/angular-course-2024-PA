@@ -20,7 +20,24 @@ export class AppComponent {
   sumNumber = 5;
   animals:string[] = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
 
+  person2: IPerson = {
+    name: 'Juan',
+    lastName: 'Perez',
+    age: 25
+  }
+
+  students:number[] = [1,2,3,4,5,6]
+  parents:number[] = [7,8,9,10]
+
   constructor(){
+    const {name, age} = this.person2
+    console.log('desestructuracion: ', name, age)
+
+    let both = [...this.students, ...this.parents]
+    console.log('spread operator: ', both)
+
+    console.log('REST operatir: ', this.sum2(2,4,6))
+
     console.log('substract ', this.substract(8,4))
 
     console.log('MAP:', this.animals.map( (animal)=>(animal + ' ' + 'new') ))
@@ -30,6 +47,11 @@ export class AppComponent {
     console.log('INDEXOF:', this.animals.indexOf('c'))
   }
   
+  public sum2(...persons:number[]){
+    //return persons[0]+persons[1]
+    return persons.reduce((acumulador,valorActual) => (acumulador + valorActual), 10)
+    }    
+
   public sum(num1: number, num2: number): number {
     return num1 + num2 //a veces pide punto y coma y a veces no
   }  
