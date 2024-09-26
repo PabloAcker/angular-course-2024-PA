@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { UserCardComponent } from './user-card/user-card.component';
 
 interface IPerson {
   name:string
@@ -10,7 +11,7 @@ interface IPerson {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, UserCardComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -29,6 +30,10 @@ export class AppComponent {
   students:number[] = [1,2,3,4,5,6]
   parents:number[] = [7,8,9,10]
 
+  var1 = 0
+  var2 = null
+  var3 = 'hola'
+
   constructor(){
     const {name, age} = this.person2
     console.log('desestructuracion: ', name, age)
@@ -39,6 +44,9 @@ export class AppComponent {
     console.log('REST operatir: ', this.sum2(2,4,6))
 
     console.log('substract ', this.substract(8,4))
+
+    console.log('Nullish Coalescing: ', this.var1 ?? this.var2)
+    console.log('OR: ', this.var1 || this.var2)
 
     console.log('MAP:', this.animals.map( (animal)=>(animal + ' ' + 'new') ))
     console.log('FOREACH:', this.animals.forEach( (animal)=>(animal + 'new') ))
