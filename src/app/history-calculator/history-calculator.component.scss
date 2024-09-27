@@ -1,0 +1,8 @@
+.history {
+    display: flex;
+    flex-direction: column; /* Asegura que los inputs se dispongan en columna */
+    gap: 10px; /* Añade espacio entre los inputs */
+    padding: 10px;
+    border: 1px solid gray;
+    background-color: #f9f9f9;
+  }  

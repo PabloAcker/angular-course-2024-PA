@@ -231,6 +231,13 @@
       <!-- <p>Add {{substract(3,5) }} </p> -->
       <p>getArray {{getArray() }}</p>
       <app-user-card [name]="'juan'" [email]= "'juan@example.com'" (sendData)="receiveData($event)"></app-user-card>
+      <p>RESULT:  {{result}}</p>
+        <calculator 
+          (sum)="onResult($event)" 
+          (mul)="onResult($event)" 
+          (reset)="onResult($event)">
+        </calculator>
+        <history-calculator [history]="history"></history-calculator>
     </div>
     <div class="divider" role="separator" aria-label="Divider"></div>
     <div class="right-side">

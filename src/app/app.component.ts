@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { UserCardComponent } from './user-card/user-card.component';
+import { CalculatorComponent } from './calculator/calculator.component';
+import { HistoryCalculatorComponent } from './history-calculator/history-calculator.component';
 
 interface IPerson {
   name:string
@@ -11,7 +13,7 @@ interface IPerson {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, UserCardComponent],
+  imports: [RouterOutlet, UserCardComponent, CalculatorComponent, HistoryCalculatorComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -26,6 +28,9 @@ export class AppComponent {
     lastName: 'Perez',
     age: 25
   }
+
+  result:number = 0;
+  history: string[] = ['','',''];
 
   students:number[] = [1,2,3,4,5,6]
   parents:number[] = [7,8,9,10]
@@ -78,6 +83,15 @@ export class AppComponent {
 
   public receiveData(data:any){
     console.log('Print in father component', data)
+  }
+
+  public onResult(event:any){
+    console.log('event from child:', event)
+    this.result = event ?? 0
+
+    // Guardamos el historial de forma circular (últimos 3 resultados)
+    this.history.pop(); // Quitamos el último elemento
+    this.history.unshift(`Resultado: ${this.result}`); // Añadimos el nuevo al inicio
   }
   
   person: IPerson = {
