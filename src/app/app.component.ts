@@ -75,6 +75,10 @@ export class AppComponent {
       console.log('person = ', peerPersons[i]);
     }
   }
+
+  public receiveData(data:any){
+    console.log('Print in father component', data)
+  }
   
   person: IPerson = {
     name: 'a',
