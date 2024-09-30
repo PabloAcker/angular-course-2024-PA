@@ -231,6 +231,8 @@
       <!-- <p>Add {{substract(3,5) }} </p> -->
       <p>getArray {{getArray() }}</p>
       <app-user-card [name]="'juan'" [email]= "'juan@example.com'" (sendData)="receiveData($event)"></app-user-card>
+      <p>My HTML from father</p>
+      <button>My button from father</button>
       <p>RESULT:  {{result}}</p>
         <calculator 
           (sum)="onResult($event)" 
@@ -238,6 +240,12 @@
           (reset)="onResult($event)">
         </calculator>
         <history-calculator [history]="history"></history-calculator>
+
+        <p *ngIf="1 === 1"> variables are equals </p>
+
+        @if(1 === 1) {
+          <p> new Sintax, variables are equals </p>
+        }
     </div>
     <div class="divider" role="separator" aria-label="Divider"></div>
     <div class="right-side">

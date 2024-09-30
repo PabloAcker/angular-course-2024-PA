@@ -1,9 +1,8 @@
-<p>user-card component</p>
-<p>INPUT NAME: {{ name }}</p>
-<p>INPUT EMAIL: {{ email }}</p>\
 <div class="user-card">
     <p>USER CARD COMPONENT</p>
     <p>INPUT NAME: {{ name }}</p>
     <p>INPUT email: {{ email }}</p>
     <button (click)="onSendData()">send Data</button>
+
+    <ng-content></ng-content>
 </div>
