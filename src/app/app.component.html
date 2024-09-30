@@ -241,38 +241,55 @@
         </calculator>
         <history-calculator [history]="history"></history-calculator>
 
-        <p *ngIf="var1 === var2; else elseold"> variables are equals </p>
-        <ng-template #elseold>
-          <p>old, result is false</p>
-        </ng-template>
+      <p *ngIf="var1 === var2; else elseold"> variables are equals </p>
+      <ng-template #elseold>
+        <p>old, result is false</p>
+      </ng-template>
 
-        @if(var1 === var2) {
-          <p> new Sintax, variables are equals </p>
-        } @else {
-          <p> new Sintax, is false</p> 
-        }
+      @if(var1 === var2) {
+        <p> new Sintax, variables are equals </p>
+      } @else {
+        <p> new Sintax, is false</p> 
+      }
 
-        <p *ngFor="let item of ['a','b','c','d']; let i = index">
-          old for, value: {{item}}, index: {{i}}
-        </p>
+      <p *ngFor="let item of ['a','b','c','d']; let i = index">
+        old for, value: {{item}}, index: {{i}}
+      </p>
 
-        @for(item of ['a','b','c','d']; track item){
-          <p>New Syntax Student: {{item}}</p>
-        }
+      @for(item of ['a','b','c','d']; track item){
+        <p>New Syntax Student: {{item}}</p>
+      }
 
 
-        <div [ngSwitch]="var1">
-          <p *ngSwitchCase="0">var is 0</p>
-          <p *ngSwitchCase="1">var is 1</p>
-          <p *ngSwitchDefault>default value</p>
-        </div>
+      <div [ngSwitch]="var1">
+        <p *ngSwitchCase="0">var is 0</p>
+        <p *ngSwitchCase="1">var is 1</p>
+        <p *ngSwitchDefault>default value</p>
+      </div>
 
-        @switch(var1) {
-          @case(0) { <p>new syntax, var is 0</p> }
-          @case(1) { <p>new syntax, var is 1</p> }
-          @default { <p>new syntax, default</p> }
-        }
-        
+      @switch(var1) {
+        @case(0) { <p>new syntax, var is 0</p> }
+        @case(1) { <p>new syntax, var is 1</p> }
+        @default { <p>new syntax, default</p> }
+      }
+
+      <p>Total personas genero femenino: {{totalFemale}}</p>
+      <p>Total personas genero masculino: {{totalMale}}</p>
+      <p>Descuento disponible: {{totalWithDiscount}}</p>
+
+      <button (click)="removePersonsWithDiscount()">Borrar personas con descuento</button>
+
+      <div class="people-list">
+        <person
+          *ngFor="let person of people"
+          [name]="person.name"
+          [age]="person.age"
+          [gender]="person.gender">
+        </person>
+      </div>
+      <!-- Me sale un error con la nueva syntaxis -->
+       
+
     </div>
     <div class="divider" role="separator" aria-label="Divider"></div>
     <div class="right-side">

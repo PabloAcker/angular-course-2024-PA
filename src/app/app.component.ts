@@ -4,8 +4,9 @@ import { UserCardComponent } from './user-card/user-card.component';
 import { CalculatorComponent } from './calculator/calculator.component';
 import { HistoryCalculatorComponent } from './history-calculator/history-calculator.component';
 import { CommonModule } from '@angular/common';
+import { PersonComponent } from './person/person.component';
 
-interface IPerson {
+interface IPersonn {
   name:string
   lastName:string
   age?:number
@@ -14,7 +15,7 @@ interface IPerson {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, UserCardComponent, CalculatorComponent, HistoryCalculatorComponent, CommonModule],
+  imports: [RouterOutlet, UserCardComponent, CalculatorComponent, HistoryCalculatorComponent, CommonModule, PersonComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -24,7 +25,15 @@ export class AppComponent {
   sumNumber = 5;
   animals:string[] = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
 
-  person2: IPerson = {
+  people = [
+    { name: 'Ana', gender: 'female', age: 19 },
+    { name: 'Emanuel', gender: 'male', age: 15 },
+    { name: 'María', gender: 'female', age: 18 },
+    { name: 'Nicolas', gender: 'male', age: 17 },
+    { name: 'Lucía', gender: 'female', age: 25 }
+  ]
+
+  person2: IPersonn = {
     name: 'Juan',
     lastName: 'Perez',
     age: 25
@@ -95,9 +104,26 @@ export class AppComponent {
     this.history.unshift(`Resultado: ${this.result}`); // Añadimos el nuevo al inicio
   }
   
-  person: IPerson = {
+  person1: IPersonn = {
     name: 'a',
     lastName: 'b',
     age: 5
+  }
+
+
+  get totalFemale(): number {
+    return this.people.filter(person => person.gender === 'female').length;
+  }
+
+  get totalMale(): number {
+    return this.people.filter(person => person.gender === 'male').length;
+  }
+
+  get totalWithDiscount(): number {
+    return this.people.filter(person => person.age > 18).length;
+  }
+
+  public removePersonsWithDiscount() {
+    this.people = this.people.filter(person => person.age <= 18);
   }
 }
