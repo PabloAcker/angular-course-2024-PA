@@ -25,6 +25,8 @@ export class AppComponent {
   sumNumber = 5;
   animals:string[] = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
 
+  userCardCreated: boolean = true
+
   people = [
     { name: 'Ana', gender: 'female', age: 19 },
     { name: 'Emanuel', gender: 'male', age: 15 },
@@ -51,17 +53,17 @@ export class AppComponent {
 
   constructor(){
     const {name, age} = this.person2
-    console.log('desestructuracion: ', name, age)
+    //console.log('desestructuracion: ', name, age)
 
     let both = [...this.students, ...this.parents]
-    console.log('spread operator: ', both)
+    //console.log('spread operator: ', both)
 
-    console.log('REST operatir: ', this.sum2(2,4,6))
+    //console.log('REST operatir: ', this.sum2(2,4,6))
 
-    console.log('substract ', this.substract(8,4))
+    //console.log('substract ', this.substract(8,4))
 
-    console.log('Nullish Coalescing: ', this.var1 ?? this.var2)
-    console.log('OR: ', this.var1 || this.var2)
+    //console.log('Nullish Coalescing: ', this.var1 ?? this.var2)
+    //console.log('OR: ', this.var1 || this.var2)
 
     console.log('MAP:', this.animals.map( (animal)=>(animal + ' ' + 'new') ))
     console.log('FOREACH:', this.animals.forEach( (animal)=>(animal + 'new') ))
