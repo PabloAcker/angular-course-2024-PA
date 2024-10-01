@@ -27,6 +27,9 @@ export class AppComponent {
 
   userCardCreated: boolean = true
 
+  users = [{ name: 'abc', 'email': 'abc@gmail.com' }, { name: 'dfg', 'email': 'dfg@gmail.com' }]
+  selectedUser:any = this.users[0];
+
   people = [
     { name: 'Ana', gender: 'female', age: 19 },
     { name: 'Emanuel', gender: 'male', age: 15 },

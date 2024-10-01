@@ -232,8 +232,11 @@
       <p>getArray {{getArray() }}</p>
 
       <button (click)="userCardCreated = !userCardCreated">create and destroy user card</button>
+
+      <button (click)="selectedUser = users[0]">change to user 0</button>
+      <button (click)="selectedUser = users[1]">change to user 1</button>
       @if(userCardCreated) {
-        <app-user-card [name]="'juan'" [email]= "'juan@example.com'" (sendData)="receiveData($event)">
+        <app-user-card [name]="selectedUser.name" [email]="selectedUser.email" (sendData)="receiveData($event)">
           <p>My HTML from father</p>
           <button>My button from father</button>
         </app-user-card>
