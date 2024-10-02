@@ -2,6 +2,8 @@
     <p>USER CARD COMPONENT</p>
     <p>INPUT NAME: {{ name }}</p>
     <p>INPUT email: {{ email }}</p>
+
+    <input type="text" [(ngModel)]="password">
     <button (click)="onSendData()">send Data</button>
 
     <p>PASSWORD = {{password}}</p>
