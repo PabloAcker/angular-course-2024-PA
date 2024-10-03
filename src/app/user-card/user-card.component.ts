@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, ElementRef, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, DoCheck,
-   AfterContentInit, AfterViewInit, ViewChild, afterNextRender, afterRender,} from '@angular/core';
+   AfterContentInit, AfterViewInit, ViewChild, AfterContentChecked, AfterViewChecked} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -10,7 +10,8 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './user-card.component.html',
   styleUrl: './user-card.component.scss'
 })
-export class UserCardComponent implements OnInit, OnDestroy, OnChanges, DoCheck, AfterContentInit, AfterViewInit{
+export class UserCardComponent implements OnInit, OnDestroy, OnChanges, DoCheck, AfterContentInit,
+ AfterViewInit, AfterContentChecked, AfterViewChecked{
   @Input() name:string = ''
   @Input() email:string = ''
 
@@ -52,10 +53,18 @@ export class UserCardComponent implements OnInit, OnDestroy, OnChanges, DoCheck,
   ngAfterViewInit(): void {
     console.log('NG AFTER VIEW INIT')
     console.log('BUTTON TEST', this.buttonTest)   
-    
+
     if(this.buttonTest){
-      this.buttonTest.nativeElement.textContent = 'button Test in ngAfterViewInit'
+      this.buttonTest.nativeElement.textContent = 'button Test in OnInit'
     }
+  }
+
+  ngAfterContentChecked(): void {
+    console.log('AFTER CONTENT CHECKED')
+  }
+
+  ngAfterViewChecked(): void {
+    console.log('NG AFTER VIEW CHECKED')
   }
 
   public onSendData(){
