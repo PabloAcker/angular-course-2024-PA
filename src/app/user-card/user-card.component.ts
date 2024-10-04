@@ -19,7 +19,7 @@ export class UserCardComponent implements OnInit, OnDestroy, OnChanges, DoCheck,
 
   @ViewChild('buttonTest', { static: false }) buttonTest!: ElementRef
   @ViewChild('buttonShow', { static: true }) buttonShow!: ElementRef
-  password: string = "";
+  password: string = "password";
   showButton:boolean = true
 
   constructor() {
