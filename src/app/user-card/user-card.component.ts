@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, ElementRef, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, DoCheck,
    AfterContentInit, AfterViewInit, ViewChild, AfterContentChecked, AfterViewChecked} from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 @Component({
   selector: "app-user-card",
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, SharedModule],
   templateUrl: './user-card.component.html',
   styleUrl: './user-card.component.scss'
 })
