@@ -16,5 +16,3 @@ import { Shared3Component } from './shared3/shared3.component';
   ]
 })
 export class SharedModule { }
-
-
