@@ -4,6 +4,8 @@ import { UserCardComponent } from './user-card/user-card.component';
 import { CalculatorComponent } from './calculator/calculator.component';
 import { CommonModule } from '@angular/common';
 import { CounterComponent } from './counter/counter.component';
+import { PersonComponent } from './person/person.component';
+import { HistoryCalculatorComponent } from './history-calculator/history-calculator.component';
 import { filter, from, map, tap } from 'rxjs';
 
 interface IPersonn {
@@ -19,7 +21,9 @@ interface IPersonn {
     UserCardComponent,
     CalculatorComponent,
     CommonModule,
-    CounterComponent],
+    CounterComponent,
+    PersonComponent,
+    HistoryCalculatorComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -75,11 +79,11 @@ export class AppComponent {
     //console.log('Nullish Coalescing: ', this.var1 ?? this.var2)
     //console.log('OR: ', this.var1 || this.var2)
 
-    //console.log('MAP:', this.animals.map( (animal)=>(animal + ' ' + 'new') ))
-    //console.log('FOREACH:', this.animals.forEach( (animal)=>(animal + 'new') ))
-    //console.log('FIND:', this.animals.find( (animal)=> animal ==='b' ))
-    //console.log('FILTER:', this.animals.filter( (animal)=> animal ==='a' ))
-    //console.log('INDEXOF:', this.animals.indexOf('c'))
+    console.log('MAP:', this.animals.map( (animal)=>(animal + ' ' + 'new') ))
+    console.log('FOREACH:', this.animals.forEach( (animal)=>(animal + 'new') ))
+    console.log('FIND:', this.animals.find( (animal)=> animal ==='b' ))
+    console.log('FILTER:', this.animals.filter( (animal)=> animal ==='a' ))
+    console.log('INDEXOF:', this.animals.indexOf('c'))
 
     this.youtube.subscribe((res) => {
       console.log("SUSCRIBER 1: ", res);
