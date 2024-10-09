@@ -2,21 +2,24 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { UserCardComponent } from './user-card/user-card.component';
 import { CalculatorComponent } from './calculator/calculator.component';
-import { HistoryCalculatorComponent } from './history-calculator/history-calculator.component';
 import { CommonModule } from '@angular/common';
-import { PersonComponent } from './person/person.component';
 import { CounterComponent } from './counter/counter.component';
+import { filter, from, map, tap } from 'rxjs';
 
 interface IPersonn {
-  name:string
-  lastName:string
-  age?:number
+  name:string;
+  lastName:string;
+  age?:number;
 }
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, UserCardComponent, CalculatorComponent, HistoryCalculatorComponent, CommonModule, PersonComponent, CounterComponent],
+  imports: [RouterOutlet,
+    UserCardComponent,
+    CalculatorComponent,
+    CommonModule,
+    CounterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -26,7 +29,7 @@ export class AppComponent {
   sumNumber = 5;
   animals:string[] = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
 
-  userCardCreated: boolean = true
+  userCardCreated: boolean = true;
 
   users = [{ name: 'abc', 'email': 'abc@gmail.com' }, { name: 'dfg', 'email': 'dfg@gmail.com' }]
   selectedUser:any = this.users[0];
@@ -55,6 +58,9 @@ export class AppComponent {
   var2 = null
   var3 = 'hola'
 
+  youtube = from([1, 2, 3, 4, 5, 6]);
+
+
   constructor(){
     const {name, age} = this.person2
     //console.log('desestructuracion: ', name, age)
@@ -69,11 +75,15 @@ export class AppComponent {
     //console.log('Nullish Coalescing: ', this.var1 ?? this.var2)
     //console.log('OR: ', this.var1 || this.var2)
 
-    console.log('MAP:', this.animals.map( (animal)=>(animal + ' ' + 'new') ))
-    console.log('FOREACH:', this.animals.forEach( (animal)=>(animal + 'new') ))
-    console.log('FIND:', this.animals.find( (animal)=> animal ==='b' ))
-    console.log('FILTER:', this.animals.filter( (animal)=> animal ==='a' ))
-    console.log('INDEXOF:', this.animals.indexOf('c'))
+    //console.log('MAP:', this.animals.map( (animal)=>(animal + ' ' + 'new') ))
+    //console.log('FOREACH:', this.animals.forEach( (animal)=>(animal + 'new') ))
+    //console.log('FIND:', this.animals.find( (animal)=> animal ==='b' ))
+    //console.log('FILTER:', this.animals.filter( (animal)=> animal ==='a' ))
+    //console.log('INDEXOF:', this.animals.indexOf('c'))
+
+    this.youtube.subscribe((res) => {
+      console.log("SUSCRIBER 1: ", res);
+    });
   }
   
   public sum2(...persons:number[]){
@@ -109,6 +119,25 @@ export class AppComponent {
     this.history.pop(); // Quitamos el último elemento
     this.history.unshift(`Resultado: ${this.result}`); // Añadimos el nuevo al inicio
   }
+
+  addVideo() {
+    this.youtube
+      .pipe(
+        map((res: number) => {
+          //console.log("MAP OPERATOER RXJS: ", res);
+          if (res % 2 === 0) {
+            return res;
+          } else {
+            return null
+          }
+        }),
+        tap((res)  => {console.log('VALUE: ', res)}),
+        filter((res: number | null) => res !== null),
+      )
+      .subscribe((res) => {
+        console.log("SUSCRIBER 2: ", res);
+      });
+    }
   
   person1: IPersonn = {
     name: 'a',
