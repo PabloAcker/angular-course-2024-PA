@@ -1,0 +1,5 @@
+<div class="item-container" [ngClass]="{'student-background': item.type === 'Student', 'professor-background': item.type === 'Professor'}">
+  <p>{{ item.name }} - {{ item.type }}</p>
+  <button (click)="onShow()">Show</button>
+  <button (click)="onDelete()">Delete</button>
+</div>

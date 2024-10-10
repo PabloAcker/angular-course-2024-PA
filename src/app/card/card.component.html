@@ -1,0 +1,36 @@
+<div class="card-container" [ngClass]="{
+  'student-card': item?.type === 'Student',
+  'professor-card': item?.type === 'Professor',
+  'message-card': currentTab === 'Messages'
+}">
+  <!-- Tab Buttons -->
+  <div>
+    <button (click)="switchTab('Personal')">Personal</button>
+    <button (click)="switchTab('Geographic')">Geographic</button>
+    <button (click)="switchTab('Messages')">Messages</button>
+  </div>
+
+  <!-- Tab Content -->
+  <div *ngIf="currentTab === 'Personal'" class="tab-content">
+    <p>Name: {{ item.name }}</p>
+    <p>Type: {{ item.type }}</p>
+    <p *ngIf="item.type === 'Student'">Score: {{ (item.score.firstTestScore + item.score.secondTestScore + item.score.finalTestScore) / 3 }}</p>
+    <p *ngIf="item.type === 'Professor'">Subject: {{ item.subject }}</p>
+  </div>
+
+  <div *ngIf="currentTab === 'Geographic'" class="tab-content">
+    <p>Address: {{ item.address }}</p>
+    <p>Country: {{ item.country }}</p>
+    <p>Province: {{ item.province }}</p>
+  </div>
+
+  <div *ngIf="currentTab === 'Messages'" class="tab-content">
+    <!-- Search Component for Messages -->
+    <app-search (search)="searchMessages($event)"></app-search>
+
+    <!-- List of Filtered Messages -->
+    <ul>
+      <li *ngFor="let message of filteredMessages">{{ message }}</li>
+    </ul>
+  </div>
+</div>
