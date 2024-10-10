@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Person } from '../app.component';
 
 @Component({
   selector: 'app-item',
@@ -9,7 +10,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./item.component.scss']
 })
 export class ItemComponent {
-  @Input() item: any;
+  @Input() person!: Person;
   @Output() show = new EventEmitter<void>();
   @Output() delete = new EventEmitter<void>();
 

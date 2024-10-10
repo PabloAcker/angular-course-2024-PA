@@ -1,10 +1,5 @@
-<div *ngFor="let item of items" class="list-item">
-    <span [ngClass]="{'student-background': item.type === 'student', 'professor-background': item.type === 'professor'}">
-      {{ item.name }} - {{ item.type }}
-    </span>
-    <div class="item-buttons">
-      <button (click)="onShow(item)">Show</button>
-      <button (click)="onDelete(item)">Delete</button>  <!-- Emitimos todo el objeto item -->
-    </div>
+<div class="list-container">
+  <div *ngFor="let item of items" class="list-item">
+    <app-item [person]="item" (show)="onShow(item)" (delete)="onDelete(item)"></app-item>
   </div>
-  
+</div>
