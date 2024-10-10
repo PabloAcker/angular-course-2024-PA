@@ -14,12 +14,19 @@
   <div *ngIf="currentTab === 'Personal'" class="tab-content">
     <p>Name: {{ item.name }}</p>
     <p>Type: {{ item.type }}</p>
-    <p *ngIf="item.type === 'Student'">Score: {{ (item.score.firstTestScore + item.score.secondTestScore + item.score.finalTestScore) / 3 }}</p>
+
+    <!-- Mostrar el score si es estudiante -->
+    <p *ngIf="item.type === 'Student'">
+      Score: {{ (item.firstTestScore + item.secondTestScore + item.finalTestScore) / 3 }}
+    </p>
+
+    <!-- Mostrar la materia si es profesor -->
     <p *ngIf="item.type === 'Professor'">Subject: {{ item.subject }}</p>
   </div>
 
   <div *ngIf="currentTab === 'Geographic'" class="tab-content">
-    <p>Address: {{ item.address }}</p>
+    <!-- Acceder correctamente a las propiedades de la dirección -->
+    <p>Address: {{ item.address.street }} {{ item.address.number }}, Zone: {{ item.address.zone }}</p>
     <p>Country: {{ item.country }}</p>
     <p>Province: {{ item.province }}</p>
   </div>
