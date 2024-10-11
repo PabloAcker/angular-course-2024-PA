@@ -8,6 +8,7 @@ import { PersonComponent } from './person/person.component';
 import { HistoryCalculatorComponent } from './history-calculator/history-calculator.component';
 import { filter, from, map, tap } from 'rxjs';
 import { AppColorsDirective } from './app-colors.directive';
+import { CreateHtmlDirective } from './create-html.directive';
 
 interface IPersonn {
   name:string;
@@ -25,7 +26,8 @@ interface IPersonn {
     CounterComponent,
     PersonComponent,
     HistoryCalculatorComponent, 
-    AppColorsDirective],
+    AppColorsDirective,
+    CreateHtmlDirective],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -35,7 +37,7 @@ export class AppComponent {
   sumNumber = 5;
   animals:string[] = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
 
-  userCardCreated: boolean = true;
+  userCardCreated: boolean = false;
 
   users = [{ name: 'abc', 'email': 'abc@gmail.com' }, { name: 'dfg', 'email': 'dfg@gmail.com' }]
   selectedUser:any = this.users[0];
@@ -126,7 +128,7 @@ export class AppComponent {
     this.history.unshift(`Resultado: ${this.result}`); // Añadimos el nuevo al inicio
   }
 
-  public getColor(value:string): void {
+  public getColor(value:any): void {
     console.log("value: ", value);
   }
 
