@@ -7,6 +7,7 @@ import { CounterComponent } from './counter/counter.component';
 import { PersonComponent } from './person/person.component';
 import { HistoryCalculatorComponent } from './history-calculator/history-calculator.component';
 import { filter, from, map, tap } from 'rxjs';
+import { AppColorsDirective } from './app-colors.directive';
 
 interface IPersonn {
   name:string;
@@ -23,7 +24,8 @@ interface IPersonn {
     CommonModule,
     CounterComponent,
     PersonComponent,
-    HistoryCalculatorComponent],
+    HistoryCalculatorComponent, 
+    AppColorsDirective],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -122,6 +124,10 @@ export class AppComponent {
     // Guardamos el historial de forma circular (últimos 3 resultados)
     this.history.pop(); // Quitamos el último elemento
     this.history.unshift(`Resultado: ${this.result}`); // Añadimos el nuevo al inicio
+  }
+
+  public getColor(value:string): void {
+    console.log("value: ", value);
   }
 
   addVideo() {
