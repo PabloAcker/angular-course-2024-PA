@@ -9,6 +9,8 @@ import { HistoryCalculatorComponent } from './history-calculator/history-calcula
 import { filter, from, map, tap } from 'rxjs';
 import { AppColorsDirective } from './app-colors.directive';
 import { CreateHtmlDirective } from './create-html.directive';
+import { PurePipe } from './pure.pipe';
+import { ImpurePipe } from './impure.pipe';
 
 interface IPersonn {
   name:string;
@@ -27,7 +29,9 @@ interface IPersonn {
     PersonComponent,
     HistoryCalculatorComponent, 
     AppColorsDirective,
-    CreateHtmlDirective],
+    CreateHtmlDirective,
+    PurePipe,
+    ImpurePipe],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -59,7 +63,7 @@ export class AppComponent {
   result:number = 0;
   history: string[] = ['','',''];
 
-  students:number[] = [1,2,3,4,5,6]
+  students:number[] = [1,2,3,4,5,6,7,8,9]
   parents:number[] = [7,8,9,10]
 
   var1 = 0
@@ -130,6 +134,10 @@ export class AppComponent {
 
   public getColor(value:any): void {
     console.log("value: ", value);
+  }
+
+  public addNumber() {
+    this.students = [...this.students, 12]
   }
 
   addVideo() {
