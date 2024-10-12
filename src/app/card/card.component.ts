@@ -13,16 +13,9 @@ export class CardComponent {
   @Input() item: any;
   currentTab: string = 'Personal';
   messageSearchQuery: string = '';
-  messages: string[] = [
-    'The next exam will be next week, make sure to prepare.',
-    'Remember, the exam will take place in the library.',
-    'Don\'t forget to bring your identification.',
-    'Check the exam schedule.',
-    'Send the course summary to the administration.'
-  ];
 
   get filteredMessages() {
-    return this.messages.filter(msg => msg.toLowerCase().includes(this.messageSearchQuery.toLowerCase()));
+    return this.item.messages.filter((msg: string) => msg.toLowerCase().includes(this.messageSearchQuery.toLowerCase()));
   }
 
   switchTab(tab: string) {

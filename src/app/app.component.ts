@@ -16,10 +16,10 @@ import { FormsModule } from '@angular/forms';
 })
 export class AppComponent {
   title: string = 'angular-course-2024-PA';
-  // Convertimos el objeto data a un array y forzamos el tipo del campo 'type'
+  
   items: Person[] = Object.values(data).map(person => ({
     ...person,
-    type: person.type === 'student' ? 'student' : 'professor'  // Forzamos el tipo
+    type: person.type === 'student' ? 'student' : 'professor'
   }));
   
   filteredItems: Person[] = [...this.items];  // Inicializa con todos los ítems
@@ -54,11 +54,11 @@ export class AppComponent {
 export interface Person {
   name: string;
   lastName: string;
-  type: 'student' | 'professor';  // Mantenemos el tipo literal
+  type: 'student' | 'professor'; 
   firstTestScore?: number;
   secondTestScore?: number;
   finalTestScore?: number;
-  subject?: string;  // Solo para los profesores
+  subject?: string; 
   address: {
     number: string;
     street: string;

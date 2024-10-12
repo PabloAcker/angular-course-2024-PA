@@ -1,52 +1,57 @@
 .item-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  &.student-background {
+    background-color: #e0f7fa; 
+  }
+
+  &.professor-background {
+    background-color: #ffe0b2;
+  }
+
+  p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  /* Alinear los botones en una columna */
+  .item-buttons {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  
-    &.student-background {
-      background-color: #e0f7fa;  // Fondo azul claro para estudiantes
-    }
-  
-    &.professor-background {
-      background-color: #ffe0b2;  // Fondo naranja claro para profesores
-    }
-  
-    p {
-      margin: 0;
-      font-size: 16px;
-      font-weight: bold;
-    }
-  
-    button {
-      padding: 5px 10px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-  
-      &:first-of-type {
-        background-color: #007bff;
-        color: white;
-        margin-right: 10px;
-  
-        &:hover {
-          background-color: #0056b3;
-        }
+    flex-direction: column; 
+    gap: 10px; 
+  }
+
+  button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:first-of-type {
+      background-color: #007bff;
+      color: white;
+
+      &:hover {
+        background-color: #0056b3;
       }
-  
-      &:last-of-type {
-        background-color: #dc3545;
-        color: white;
-  
-        &:hover {
-          background-color: #c82333;
-        }
+    }
+
+    &:last-of-type {
+      background-color: #dc3545;
+      color: white;
+
+      &:hover {
+        background-color: #c82333;
       }
     }
   }
-  
+}

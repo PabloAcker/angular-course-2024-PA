@@ -1,6 +1,8 @@
 <div class="card-container" [ngClass]="{
-  'student-card': item?.type === 'Student',
-  'professor-card': item?.type === 'Professor',
+  'student-card': item?.type === 'student',
+  'professor-card': item?.type === 'professor',
+  'personal-tab': currentTab === 'Personal',
+  'geographic-tab': currentTab === 'Geographic',
   'message-card': currentTab === 'Messages'
 }">
   <!-- Tab Buttons -->
@@ -13,20 +15,21 @@
   <!-- Tab Content -->
   <div *ngIf="currentTab === 'Personal'" class="tab-content">
     <p>Name: {{ item.name }}</p>
+    <p>LastName: {{ item.lastName }}</p>
     <p>Type: {{ item.type }}</p>
-
     <!-- Mostrar el score si es estudiante -->
-    <p *ngIf="item.type === 'Student'">
-      Score: {{ (item.firstTestScore + item.secondTestScore + item.finalTestScore) / 3 }}
+    <p *ngIf="item.type === 'student' && item.firstTestScore !== undefined">
+      Score (Student): {{ (item.firstTestScore + item.secondTestScore + item.finalTestScore) / 3 | number: '1.0-0' }}
     </p>
 
-    <!-- Mostrar la materia si es profesor -->
-    <p *ngIf="item.type === 'Professor'">Subject: {{ item.subject }}</p>
+    <!-- Mostrar el subject si es profesor -->
+    <p *ngIf="item.type === 'professor' && item.subject !== undefined">
+      Subject (Professor): {{ item.subject }}
+    </p>
   </div>
 
   <div *ngIf="currentTab === 'Geographic'" class="tab-content">
-    <!-- Acceder correctamente a las propiedades de la dirección -->
-    <p>Address: {{ item.address.street }} {{ item.address.number }}, Zone: {{ item.address.zone }}</p>
+    <p>Address: {{ item.address.zone }} {{ item.address.street }}, Number: {{ item.address.number }}</p>
     <p>Country: {{ item.country }}</p>
     <p>Province: {{ item.province }}</p>
   </div>

@@ -1,44 +1,63 @@
 .card-container {
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 20px;
-    background-color: #fff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  
-    button {
-      padding: 10px 15px;
-      border: none;
-      border-radius: 5px;
-      margin-right: 10px;
-      cursor: pointer;
-      background-color: #007bff;
-      color: white;
-      transition: background-color 0.3s ease;
-  
-      &:hover {
-        background-color: #0056b3;
-      }
-    }
-  
-    .tab-content {
-      margin-top: 15px;
-  
-      p {
-        font-size: 16px;
-        margin: 5px 0;
-      }
-    }
-  
-    &.student-card {
-      background-color: #e0f7fa;
-    }
-  
-    &.professor-card {
-      background-color: #ffe0b2;
-    }
-  
-    &.message-card {
-      background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  /* Estilo para los botones */
+  button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #0056b3;
     }
   }
-  
+
+  /* Fondo para los tabs "Personal" y "Geographic" */
+  &.student-card.personal-tab,
+  &.student-card.geographic-tab {
+    background-color: #e0f7fa; /* Azul para estudiantes */
+  }
+
+  &.professor-card.personal-tab,
+  &.professor-card.geographic-tab {
+    background-color: #ffe0b2; /* Naranja para profesores */
+  }
+
+  /* Contenido de las pestañas */
+  .tab-content {
+    margin-top: 15px;
+
+    p {
+      font-size: 16px;
+      margin: 5px 0;
+    }
+  }
+
+  /* Fondo para la pestaña de Mensajes */
+  &.message-card {
+    background-color: #f5f5dc; /* Beige para el contenedor de mensajes */
+  }
+
+  /* Estilo para la lista de mensajes */
+  ul {
+    list-style-type: disc;
+    padding-left: 20px;
+  }
+
+  li {
+    background-color: #ffffff;  /* Fondo blanco para cada mensaje */
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+}
