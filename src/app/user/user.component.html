@@ -1,0 +1,35 @@
+<div *ngIf="user.status === 'active'; else blockedAccount">
+    <div class="user-info">
+      <h2>{{ user.name }}</h2>
+      <p>Age: {{ user.age }}</p>
+      <p>Status: {{ user.status }}</p>
+      <p>
+        Subscription type: 
+        <button (click)="changeSubscription('free')" [class.active]="user.subscriptionType === 'free'">Free</button>
+        <button (click)="changeSubscription('premium')" [class.active]="user.subscriptionType === 'premium'">Premium</button>
+      </p>
+      <p>Amount available: {{ user.amountAvailable }}$</p>
+  
+      <div class="social-networks">
+        <h3>Social Networks</h3>
+        <div *ngFor="let network of availableNetworks">
+          {{ network.platform }}
+          <button (click)="addSubscription(network.id)">+</button>
+        </div>
+      </div>
+  
+      <div class="subscriptions">
+        <h3>Subscriptions</h3>
+        <div *ngFor="let network of socialNetworks.filter(sn => user.subscriptions.includes(sn.id))">
+          {{ network.platform }}
+          <button (click)="removeSubscription(network.id)">x</button>
+        </div>
+      </div>
+      <button (click)="closeAccount()">Close account</button>
+    </div>
+  </div>
+  
+  <ng-template #blockedAccount>
+    <p>This account is closed and cannot interact.</p>
+  </ng-template>
+  

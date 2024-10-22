@@ -1,0 +1,10 @@
+<div class="social-network-grid">
+    <div *ngFor="let network of socialNetworks" [style.background-color]="getNetworkColor(network)" class="network-item">
+      <span *ngIf="network.platformType === 'premium'" class="star">⭐</span>
+      <button class="add-btn" (click)="addNotification(network)">
+        Add new {{ network.type }}
+      </button>
+      {{ network.platform }}
+    </div>
+  </div>
+  
