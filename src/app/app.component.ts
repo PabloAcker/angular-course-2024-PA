@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SocialNetworksComponent } from './social-networks/social-networks.component';
 import { UserComponent } from './user/user.component';
 import { NotificationComponent } from './notification/notification.component';
-import { data } from './data';
+import { data } from './data'; // Datos de los usuarios y redes sociales
 
 @Component({
   selector: 'app-root',
@@ -13,43 +13,52 @@ import { data } from './data';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  users = Object.values(data);
-  title = 'angular-course-2024-pa';
+  title = 'angular-course-2024';
+  users = Object.values(data);  // Cargar los datos de los usuarios desde el archivo data.ts
 
+  // Lógica para manejar las notificaciones de las redes sociales
   handleNewNotification(event: { networkId: number, platform: string }) {
     this.users.forEach(user => {
       if (user.subscriptions.includes(event.networkId)) {
-        if (user.subscriptionType === 'premium' || ![3, 5].includes(event.networkId)) { // Solo premium pueden recibir TikTok y WhatsApp
+        // Lógica para usuarios Free y Premium
+        if (user.subscriptionType === 'premium') {
+          // Si es Premium y está suscrito a una app Premium, le llega la notificación
           user.notifications.push(`${event.platform} added a new ${event.platform === 'whatsapp' ? 'message' : 'video/story'}`);
-          if (user.subscriptionType === 'premium' && [3, 5].includes(event.networkId)) {
+
+          // Si la notificación es de una app Premium (TikTok o WhatsApp), se descuenta $5
+          if ([3, 5].includes(event.networkId)) {
             user.amountAvailable -= 5;
+
+            // Si el saldo llega a 0 o menos, cambiar a Free
             if (user.amountAvailable <= 0) {
-              user.subscriptionType = 'free';  // Cambia a free si no tiene saldo
+              user.subscriptionType = 'free';
+              user.amountAvailable = 0;  // Asegurarse de que no quede saldo negativo
             }
           }
+        } else if (user.subscriptionType === 'free' && ![3, 5].includes(event.networkId)) {
+          // Si es Free y no es una app Premium, recibe notificaciones solo de apps Free
+          user.notifications.push(`${event.platform} added a new ${event.platform === 'whatsapp' ? 'message' : 'video/story'}`);
         }
       }
     });
   }
 
+  // Lógica para cambiar la suscripción del usuario
   handleSubscriptionChange(user: any, type: string) {
-    if (type === 'premium' && user.amountAvailable > 0) {
-      user.subscriptionType = type;
-    } else if (type === 'free') {
-      user.subscriptionType = type;
-    }
+    user.subscriptionType = type;
   }
 
-  handleAddSubscription(user: any, networkId: any) {
-    if (!user.subscriptions.includes(networkId)) {
-      user.subscriptions.push(networkId);
-    }
+  // Lógica para agregar una nueva suscripción
+  handleAddSubscription(user: any, networkId: number) {
+    user.subscriptions.push(networkId);
   }
 
-  handleRemoveSubscription(user: any, networkId: any) {
+  // Lógica para eliminar una suscripción
+  handleRemoveSubscription(user: any, networkId: number) {
     user.subscriptions = user.subscriptions.filter((id: number) => id !== networkId);
   }
 
+  // Lógica para cerrar la cuenta de un usuario
   handleCloseAccount(user: any) {
     user.status = 'inactive';
   }

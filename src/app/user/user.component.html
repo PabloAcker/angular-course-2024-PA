@@ -1,59 +1,54 @@
 <div class="tab-container">
-    <!-- Contenedor de pestañas -->
-    <div class="tabs">
-      <button
-        class="tab-btn"
-        [class.active]="activeTab === 'user'"
-        (click)="setActiveTab('user')"
-      >
-        User
-      </button>
-      <button
-        class="tab-btn"
-        [class.active]="activeTab === 'notifications'"
-        (click)="setActiveTab('notifications')"
-      >
-        Notifications ({{ user.notifications.length }})
-      </button>
+  <div class="tabs">
+    <button class="tab-btn" [class.active]="activeTab === 'user'" (click)="setActiveTab('user')">User</button>
+    <button class="tab-btn" [class.active]="activeTab === 'notifications'" (click)="setActiveTab('notifications')">Notifications ({{ user.notifications.length }})</button>
+  </div>
+
+  <div class="tab-content">
+    <!-- Pestaña User -->
+    <div *ngIf="activeTab === 'user'">
+      <p><strong>Name:</strong> {{ user.name }}</p>
+      <p><strong>Age:</strong> {{ user.age }}</p>
+      <p><strong>Status:</strong> {{ user.status }}</p>
+
+      <p><strong>Subscription:</strong></p>
+      <div class="subscription-buttons">
+        <button [class.active]="user.subscriptionType === 'free'" (click)="changeSubscription('free')" class="subscription-btn">Free</button>
+        <button [class.active]="user.subscriptionType === 'premium'" (click)="changeSubscription('premium')" class="subscription-btn" [disabled]="user.amountAvailable <= 0">Premium</button>
+      </div>
+
+      <p><strong>Available Amount:</strong> ${{ user.amountAvailable }}</p>
+
+      <!-- Redes sociales no suscritas -->
+      <div class="social-networks">
+        <h3>Social Networks Available</h3>
+        <div class="network-list">
+          <div *ngFor="let network of getAvailableNetworks()"
+               [ngClass]="{'network-card': true, 'tiktok': network.platform === 'tiktok', 'youtube': network.platform === 'youtube', 'facebook': network.platform === 'facebook', 'instagram': network.platform === 'instagram', 'whatsapp': network.platform === 'whatsapp'}">
+            {{ network.platform }}
+            <button (click)="addSubscription(network.id)" class="add-btn">+</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Redes sociales suscritas -->
+      <div class="subscriptions">
+        <h3>Subscriptions</h3>
+        <div class="network-list">
+          <div *ngFor="let network of getSubscribedNetworks()"
+               [ngClass]="{'network-card': true, 'tiktok': network.platform === 'tiktok', 'youtube': network.platform === 'youtube', 'facebook': network.platform === 'facebook', 'instagram': network.platform === 'instagram', 'whatsapp': network.platform === 'whatsapp'}">
+            {{ network.platform }}
+            <button (click)="removeSubscription(network.id)" class="remove-btn">x</button>
+          </div>
+        </div>
+      </div>
+
+      <button (click)="closeAccount()" class="close-account-btn">Close Account</button>
     </div>
-  
-    <!-- Contenido de la pestaña activa -->
-    <div class="tab-content">
-      <!-- Información del usuario -->
-      <div *ngIf="activeTab === 'user'">
-        <p><strong>Name:</strong> {{ user.name }}</p>
-        <p><strong>Age:</strong> {{ user.age }}</p>
-        <p><strong>Status:</strong> {{ user.status }}</p>
-  
-        <p><strong>Subscription:</strong>
-          <!-- Botones para cambiar el tipo de suscripción -->
-          <button
-            [class.active]="user.subscriptionType === 'free'"
-            (click)="changeSubscription('free')"
-            class="subscription-btn"
-          >
-            Free
-          </button>
-          <button
-            [class.active]="user.subscriptionType === 'premium'"
-            (click)="changeSubscription('premium')"
-            class="subscription-btn"
-            [disabled]="user.amountAvailable <= 0"
-          >
-            Premium
-          </button>
-        </p>
-  
-        <p><strong>Available Amount:</strong> ${{ user.amountAvailable }}</p>
-  
-        <!-- Botón de cerrar cuenta -->
-        <button (click)="closeAccount()">Close Account</button>
-      </div>
-  
-      <!-- Notificaciones solo visibles cuando la pestaña 'notifications' está activa -->
-      <div *ngIf="activeTab === 'notifications'">
-        <p *ngFor="let notification of user.notifications">{{ notification }}</p>
-      </div>
+
+    <!-- Pestaña Notifications -->
+    <div *ngIf="activeTab === 'notifications'">
+      <p *ngFor="let notification of user.notifications">{{ notification }}</p>
     </div>
   </div>
-  
+</div>
