@@ -1,12 +1,19 @@
-<app-social-network (newNotification)="handleNewNotification($event)"></app-social-network>
+<div class="app-container">
+  <section class="social-networks-section">
+    <!-- Redes sociales -->
+    <app-social-networks (newNotification)="handleNewNotification($event)"></app-social-networks>
+  </section>
 
-<div *ngFor="let user of users">
-  <app-user 
-    [user]="user"
-    (onChangeSubscription)="handleSubscriptionChange(user, $event)"
-    (onAddSubscription)="handleAddSubscription(user, $event)"
-    (onRemoveSubscription)="handleRemoveSubscription(user, $event)"
-    (onCloseAccount)="handleCloseAccount(user)"
-  ></app-user>
-  <app-notification [notifications]="user.notifications"></app-notification>
+  <section class="users-section">
+    <!-- Usuarios -->
+    <div *ngFor="let user of users" class="user-container">
+      <app-user
+        [user]="user"
+        (onChangeSubscription)="handleSubscriptionChange(user, $event)"
+        (onAddSubscription)="handleAddSubscription(user, $event)"
+        (onRemoveSubscription)="handleRemoveSubscription(user, $event)"
+        (onCloseAccount)="handleCloseAccount(user)"
+      ></app-user>
+    </div>
+  </section>
 </div>

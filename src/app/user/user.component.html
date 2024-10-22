@@ -1,35 +1,59 @@
-<div *ngIf="user.status === 'active'; else blockedAccount">
-    <div class="user-info">
-      <h2>{{ user.name }}</h2>
-      <p>Age: {{ user.age }}</p>
-      <p>Status: {{ user.status }}</p>
-      <p>
-        Subscription type: 
-        <button (click)="changeSubscription('free')" [class.active]="user.subscriptionType === 'free'">Free</button>
-        <button (click)="changeSubscription('premium')" [class.active]="user.subscriptionType === 'premium'">Premium</button>
-      </p>
-      <p>Amount available: {{ user.amountAvailable }}$</p>
+<div class="tab-container">
+    <!-- Contenedor de pestañas -->
+    <div class="tabs">
+      <button
+        class="tab-btn"
+        [class.active]="activeTab === 'user'"
+        (click)="setActiveTab('user')"
+      >
+        User
+      </button>
+      <button
+        class="tab-btn"
+        [class.active]="activeTab === 'notifications'"
+        (click)="setActiveTab('notifications')"
+      >
+        Notifications ({{ user.notifications.length }})
+      </button>
+    </div>
   
-      <div class="social-networks">
-        <h3>Social Networks</h3>
-        <div *ngFor="let network of availableNetworks">
-          {{ network.platform }}
-          <button (click)="addSubscription(network.id)">+</button>
-        </div>
+    <!-- Contenido de la pestaña activa -->
+    <div class="tab-content">
+      <!-- Información del usuario -->
+      <div *ngIf="activeTab === 'user'">
+        <p><strong>Name:</strong> {{ user.name }}</p>
+        <p><strong>Age:</strong> {{ user.age }}</p>
+        <p><strong>Status:</strong> {{ user.status }}</p>
+  
+        <p><strong>Subscription:</strong>
+          <!-- Botones para cambiar el tipo de suscripción -->
+          <button
+            [class.active]="user.subscriptionType === 'free'"
+            (click)="changeSubscription('free')"
+            class="subscription-btn"
+          >
+            Free
+          </button>
+          <button
+            [class.active]="user.subscriptionType === 'premium'"
+            (click)="changeSubscription('premium')"
+            class="subscription-btn"
+            [disabled]="user.amountAvailable <= 0"
+          >
+            Premium
+          </button>
+        </p>
+  
+        <p><strong>Available Amount:</strong> ${{ user.amountAvailable }}</p>
+  
+        <!-- Botón de cerrar cuenta -->
+        <button (click)="closeAccount()">Close Account</button>
       </div>
   
-      <div class="subscriptions">
-        <h3>Subscriptions</h3>
-        <div *ngFor="let network of socialNetworks.filter(sn => user.subscriptions.includes(sn.id))">
-          {{ network.platform }}
-          <button (click)="removeSubscription(network.id)">x</button>
-        </div>
+      <!-- Notificaciones solo visibles cuando la pestaña 'notifications' está activa -->
+      <div *ngIf="activeTab === 'notifications'">
+        <p *ngFor="let notification of user.notifications">{{ notification }}</p>
       </div>
-      <button (click)="closeAccount()">Close account</button>
     </div>
   </div>
-  
-  <ng-template #blockedAccount>
-    <p>This account is closed and cannot interact.</p>
-  </ng-template>
   
