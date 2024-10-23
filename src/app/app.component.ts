@@ -13,6 +13,7 @@ import { PurePipe } from './pure.pipe';
 import { ImpurePipe } from './impure.pipe';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
 
 interface IPersonn {
   name:string;
@@ -36,12 +37,18 @@ interface IPersonn {
     ImpurePipe,
     MatCardModule,
     MatButtonModule,
-    RouterLink],
+    RouterLink,
+    FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 
 export class AppComponent {
+
+  name:string = 'testName'
+  lastName:string = ''
+
+
   title = 'angular-course-2024-PA';
   sumNumber = 5;
   animals:string[] = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
@@ -154,6 +161,10 @@ export class AppComponent {
 
   public onCalculator(){
     this.router.navigate(['cal'], {queryParams: {name: 'John', age: 20}})
+  }
+
+  onSubmit(data:any){
+    console.log('TEMPLATE DRIVEN FORM: ', data)
   }
 
 
