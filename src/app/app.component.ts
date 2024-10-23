@@ -13,7 +13,7 @@ import { PurePipe } from './pure.pipe';
 import { ImpurePipe } from './impure.pipe';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 interface IPersonn {
   name:string;
@@ -38,12 +38,15 @@ interface IPersonn {
     MatCardModule,
     MatButtonModule,
     RouterLink,
-    FormsModule],
+    FormsModule,
+    ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 
 export class AppComponent {
+
+  scoreControl = new FormControl<string>('asdasdasd', [Validators.required])
 
   name:string = 'testName'
   lastName:string = ''
@@ -108,6 +111,10 @@ export class AppComponent {
     this.youtube.subscribe((res) => {
       console.log("SUSCRIBER 1: ", res);
     });
+
+    this.scoreControl.valueChanges.subscribe((res) => {
+      console.log('SCORE VALUE OBSERVABLE: ', res)
+    })
   }
   
   public sum2(...persons:number[]){
@@ -165,6 +172,10 @@ export class AppComponent {
 
   onSubmit(data:any){
     console.log('TEMPLATE DRIVEN FORM: ', data)
+  }
+
+  onPrintScore(){
+    console.log('SCORE: ', this.scoreControl.value)
   }
 
 
