@@ -1,25 +1,23 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { socialNetworks } from '../data';  // Importar correctamente los datos desde data.ts
+import { socialNetworks } from '../data';
 
 @Component({
-  selector: 'app-social-networks',  // Asegúrate de que el selector sea correcto
+  selector: 'app-social-networks',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './social-networks.component.html',
   styleUrls: ['./social-networks.component.scss']
 })
-export class SocialNetworksComponent {
-  socialNetworks = socialNetworks;  // Asignar los datos de redes sociales
+export class SocialNetworkComponent {
+  socialNetworks = socialNetworks;
 
-  @Output() newNotification = new EventEmitter<{ networkId: number, platform: string }>();  // Emitir un evento para la nueva notificación
+  @Output() newNotification = new EventEmitter<{ networkId: number, platform: string }>();
 
-  // Método para agregar una notificación
   addNotification(socialNetwork: any) {
     this.newNotification.emit({ networkId: socialNetwork.id, platform: socialNetwork.platform });
   }
 
-  // Método para asignar colores a las plataformas sociales
   getNetworkColor(socialNetwork: any): string {
     switch (socialNetwork.platform) {
       case 'youtube':
@@ -33,7 +31,7 @@ export class SocialNetworksComponent {
       case 'whatsapp':
         return '#25D366';
       default:
-        return '#ddd';  // Color por defecto
+        return '#ddd';
     }
   }
 }

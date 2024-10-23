@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { socialNetworks } from '../data';  // Asegúrate de importar el archivo correcto de data
+import { socialNetworks } from '../data'; 
 
 @Component({
   selector: 'app-user',
@@ -19,7 +19,6 @@ export class UserComponent {
   activeTab: string = 'user';
   socialNetworks = socialNetworks;
 
-  // Colores asociados a las redes sociales
   networkColors: { [key: string]: string } = {
     youtube: '#FF0000',
     facebook: '#3b5998',
@@ -62,5 +61,9 @@ export class UserComponent {
 
   getNetworkColor(platform: string): string {
     return this.networkColors[platform] || '#ddd';
+  }
+
+  isAccountInactive(): boolean {
+    return this.user.status === 'inactive';
   }
 }

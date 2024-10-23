@@ -1,7 +1,7 @@
 <div class="social-network-grid">
   <div *ngFor="let socialNetwork of socialNetworks" [ngStyle]="{'background-color': getNetworkColor(socialNetwork)}" class="network-item">
-    <!-- Cambiar el ícono si la plataforma es premium -->
-    <span *ngIf="socialNetwork.platformType === 'premium'" class="premium-icon">🔒</span>
+    <!-- Cambiar el ícono a premium (por ejemplo, una medalla) -->
+    <span *ngIf="socialNetwork.platformType === 'premium'" class="premium-icon">🏅</span>
 
     <!-- Botón para agregar nueva notificación -->
     <button class="add-btn" (click)="addNotification(socialNetwork)">
