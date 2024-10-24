@@ -13,7 +13,7 @@ import { PurePipe } from './pure.pipe';
 import { ImpurePipe } from './impure.pipe';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 interface IPersonn {
   name:string;
@@ -87,8 +87,10 @@ export class AppComponent {
 
   youtube = from([1, 2, 3, 4, 5, 6]);
 
+  studentForm!: FormGroup
 
-  constructor(private router: Router){
+
+  constructor(private router: Router, private formBuilder: FormBuilder){
     const {name, age} = this.person2
     //console.log('desestructuracion: ', name, age)
 
@@ -115,7 +117,23 @@ export class AppComponent {
     this.scoreControl.valueChanges.subscribe((res) => {
       console.log('SCORE VALUE OBSERVABLE: ', res)
     })
+
+    this.studentForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      score: [''],
+      school: [''],
+      proffesor: [''],
+      university: ['']
+    })
+    this.studentForm.valueChanges.subscribe((res) => {
+      console.log('FORM GROUP OBSERVABLE: ', res)
+    })
   }
+
+  onSendData() {
+    console.log('FORM GROUP: ', this.studentForm)
+  }
+  
   
   public sum2(...persons:number[]){
     //return persons[0]+persons[1]
