@@ -149,11 +149,16 @@ export class AppComponent {
       proffesor: new FormControl<string>(''),
       university: new FormControl<string>('')
     }) */
-   
+
     this.studentForm.valueChanges.subscribe((res) => {
       console.log('FORM GROUP OBSERVABLE: ', res)
     })
   }
+
+  print(){
+    console.log('FORM NAME: ', this.studentForm.get('name'))
+  }
+
 
   onSendData() {
     console.log('FORM GROUP: ', this.studentForm)
