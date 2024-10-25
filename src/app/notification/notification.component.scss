@@ -1,12 +1,7 @@
 .notification {
-
-    padding: 10px;
-  
-    background-color: #f4f4f4;
-  
-    margin-bottom: 10px;
-  
-    border-radius: 5px;
-  
-  }
-  
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  color: white;  /* Para que el texto sea visible en todos los fondos */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
