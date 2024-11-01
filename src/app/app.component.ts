@@ -14,6 +14,7 @@ import { ImpurePipe } from './impure.pipe';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { StudentService } from './services/student.service';
 
 interface IPersonn {
   name:string;
@@ -99,7 +100,12 @@ export class AppComponent {
   student2Form!: UntypedFormGroup
 
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private untypedFormBuilder: UntypedFormBuilder){
+  constructor(private _studentService: StudentService, private router: Router, private formBuilder: FormBuilder, private untypedFormBuilder: UntypedFormBuilder){
+
+    this._studentService.getStudents().subscribe((res) => {
+      console.log('STUDENTS JSON: ', res)
+    }); 
+
     const {name, age} = this.person2
     //console.log('desestructuracion: ', name, age)
 
