@@ -22,7 +22,7 @@
   
     <ul class="city-list">
       <li *ngFor="let city of cities" (click)="deleteCity(city.name)">
-        {{ city.name }}
+        {{ city.id }} - {{ city.name }}
       </li>
     </ul>
   </div>

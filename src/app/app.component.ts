@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { CityListComponent } from './city-list/city-list.component';
-import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CityListComponent, HttpClientModule],
-  template: `<app-city-list></app-city-list>`,
+  imports: [CityListComponent],
+  templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {}

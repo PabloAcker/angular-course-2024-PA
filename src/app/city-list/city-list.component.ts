@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CityService } from '../services/city.service';
-import { FormsModule } from "@angular/forms";
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-city-list',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './city-list.component.html',
   styleUrls: ['./city-list.component.scss']
 })
@@ -17,14 +18,20 @@ export class CityListComponent implements OnInit {
 
   constructor(private cityService: CityService) {}
 
-  ngOnInit(): void {
-    // Cargar ciudades al iniciar el componente
-    this.cities = this.cityService.getCities();
+  async ngOnInit() {
+    this.cities = await this.cityService.getCities();
   }
 
-  addCity() {
-    if (this.cityService.addCity(this.newCityName)) {
-      this.cities = this.cityService.getCities();
+  async addCity() {
+    // Validación para evitar nombres vacíos o solo con espacios
+    if (!this.newCityName.trim()) {
+      this.errorMessage = 'City name cannot be empty!';
+      return;
+    }
+
+    const success = await this.cityService.addCity(this.newCityName);
+    if (success) {
+      this.cities = await this.cityService.getCities();
       this.newCityName = '';
       this.errorMessage = '';
     } else {
@@ -32,12 +39,17 @@ export class CityListComponent implements OnInit {
     }
   }
 
-  deleteCity(cityName: string) {
-    this.cityService.deleteCity(cityName);
-    this.cities = this.cityService.getCities();
+  async deleteCity(cityName: string) {
+    await this.cityService.deleteCity(cityName);
+    this.cities = await this.cityService.getCities();
   }
 
-  searchCities() {
-    this.cities = this.cityService.searchCities(this.searchQuery);
+  async searchCities() {
+    this.errorMessage = '';
+    if (this.searchQuery) {
+      this.cities = await this.cityService.searchCities(this.searchQuery);
+    } else {
+      this.cities = await this.cityService.getCities();
+    }
   }
 }
