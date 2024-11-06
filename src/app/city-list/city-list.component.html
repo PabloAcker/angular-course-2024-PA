@@ -1,0 +1,29 @@
+<div class="city-list-container">
+    <h2>Cities List</h2>
+  
+    <div class="add-city-form">
+      <input
+        type="text"
+        placeholder="Add a new city"
+        [(ngModel)]="newCityName"
+      />
+      <button (click)="addCity()">Add City</button>
+      <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+    </div>
+  
+    <div class="search-form">
+      <input
+        type="text"
+        placeholder="Search city"
+        [(ngModel)]="searchQuery"
+      />
+      <button (click)="searchCities()">Search</button>
+    </div>
+  
+    <ul class="city-list">
+      <li *ngFor="let city of cities" (click)="deleteCity(city.name)">
+        {{ city.name }}
+      </li>
+    </ul>
+  </div>
+  

@@ -1,14 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { CityListComponent } from './city-list/city-list.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  imports: [CityListComponent, HttpClientModule],
+  template: `<app-city-list></app-city-list>`,
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'angular-course-2024-PA';
-  sumNumber = 5;
-}
+export class AppComponent {}
