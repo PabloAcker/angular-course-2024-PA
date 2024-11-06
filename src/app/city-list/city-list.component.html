@@ -6,9 +6,11 @@
         type="text"
         placeholder="Add a new city"
         [(ngModel)]="newCityName"
+        maxlength="{{ maxCityNameLength }}"
       />
       <button (click)="addCity()">Add City</button>
       <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+      <div *ngIf="maxLengthMessage" class="error">{{ maxLengthMessage }}</div>
     </div>
   
     <div class="search-form">
