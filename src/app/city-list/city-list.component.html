@@ -25,7 +25,7 @@
     <ul class="city-list">
       <li *ngFor="let city of cities" (click)="deleteCity(city.name)">
         {{ city.id }} - {{ city.name }}
-        <span *ngIf="city.id === latestCityId" class="new-city-icon">🏅</span>
+        <span *ngIf="city.id === latestCityId" class="new-city-badge">NEW</span>
       </li>
     </ul>
   </div>

@@ -31,7 +31,13 @@ export class CityListComponent implements OnInit {
       return;
     }
 
+    if (this.newCityName.trim() === '') {
+      this.errorMessage = 'City name cannot be empty!';
+      return;
+    }
+
     this.maxLengthMessage = '';
+    this.errorMessage = '';
 
     const success = await this.cityService.addCity(this.newCityName.trim());
     if (success) {
