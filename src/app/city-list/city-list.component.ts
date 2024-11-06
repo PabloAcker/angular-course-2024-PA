@@ -17,6 +17,7 @@ export class CityListComponent implements OnInit {
   errorMessage: string = '';
   maxLengthMessage: string = '';
   maxCityNameLength = 20;
+  latestCityId: number | null = null;
 
   constructor(private cityService: CityService) {}
 
@@ -29,12 +30,14 @@ export class CityListComponent implements OnInit {
       this.maxLengthMessage = `City name cannot exceed ${this.maxCityNameLength} characters.`;
       return;
     }
-    
+
     this.maxLengthMessage = '';
 
     const success = await this.cityService.addCity(this.newCityName.trim());
     if (success) {
       this.cities = await this.cityService.getCities();
+      const newlyAddedCity = this.cities.find(city => city.name.toLowerCase() === this.newCityName.trim().toLowerCase());
+      this.latestCityId = newlyAddedCity ? newlyAddedCity.id : null;
       this.newCityName = '';
       this.errorMessage = '';
     } else {
@@ -45,6 +48,12 @@ export class CityListComponent implements OnInit {
   async deleteCity(cityName: string) {
     await this.cityService.deleteCity(cityName);
     this.cities = await this.cityService.getCities();
+    if (this.cities.length > 0) {
+      const lastAddedCity = this.cities.find(city => city.id === this.latestCityId);
+      this.latestCityId = lastAddedCity ? lastAddedCity.id : null;
+    } else {
+      this.latestCityId = null;
+    }
   }
 
   async searchCities() {
